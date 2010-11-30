@@ -51,7 +51,7 @@ Cradle's API builds right on top of Node's asynch API. Every asynch method takes
 
 ### Opening a connection ###
 
-    new(cradle.Connection)('http://living-room.couch', 5984, {
+    new(cradle.Connection)('living-room.couch', 5984, {
         cache: true,
         raw: false
     });
@@ -60,10 +60,21 @@ _Defaults to `127.0.0.1:5984`_
 
 Note that you can also use `cradle.setup` to set a global configuration:
 
-    cradle.setup({host: 'http://living-room.couch',
+    cradle.setup({host: 'living-room.couch',
                   options: {cache: true, raw: false}});
     var c = new(cradle.Connection),
        cc = new(cradle.Connection)('173.45.66.92');
+
+### Connection pooling ###
+
+Due to cache coherence issues, connection pooling is currently only available for non-caching instances. If caching is enabled, only one client will be used internally.
+Otherwise, the number of client connections to be used for handling requests can be set using the `poolsize` variable. The following example creates a cradle connection handle with 64 parallel HTTP connections:
+
+	var c = new (cradle.Connection)("localhost", 5984, {
+		cache : false,
+		raw : false,
+		poolsize : 128
+	});
 
 ### creating a database ###
 
