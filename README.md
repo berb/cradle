@@ -73,7 +73,7 @@ Otherwise, the number of client connections to be used for handling requests can
 	var c = new (cradle.Connection)("localhost", 5984, {
 		cache : false,
 		raw : false,
-		poolsize : 128
+		poolsize : 64
 	});
 
 ### creating a database ###
