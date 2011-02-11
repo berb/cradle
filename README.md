@@ -65,6 +65,18 @@ Note that you can also use `cradle.setup` to set a global configuration:
     var c = new(cradle.Connection),
        cc = new(cradle.Connection)('173.45.66.92');
 
+### Connection pooling ###
+
+Due to cache coherence issues, connection pooling is currently only available for non-caching instances. If caching is enabled, only one client will be used internally.
+Otherwise, the number of client connections to be used for handling requests can be set using the `poolsize` variable. The following example creates a cradle connection handle with 32 parallel HTTP connections:
+
+	var c = new (cradle.Connection)("localhost", 5984, {
+		cache : false,
+		raw : false,
+		poolsize : 32
+	});
+
+
 ### creating a database ###
 
     var db = c.database('starwars');
