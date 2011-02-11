@@ -93,6 +93,23 @@ Cradle is also able to fetch multiple documents if you have a list of ids, just 
         });
     });
 
+### Spatial query (GeoCouch only) ###
+
+    db.spatial('main/points', [0,0,90,90], function (err, res) {
+        res.forEach(function (row) {
+            //handle row.bbox
+        });
+    });
+
+Count query:
+
+    db.spatial('main/points', [110,-60,-30,15], {count:true} function (err, res) {
+            //handle res.count
+    });
+
+
+
+
 ### creating/updating documents ###
 
 In general, document creation is done with the `save()` method, while updating is done with `merge()`.
